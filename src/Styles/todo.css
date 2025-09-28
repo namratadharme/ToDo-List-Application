@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 40%;
+  height: auto;
+  border-radius: 15px;
+  padding: 20px;
+  background-color: rgba(250, 248, 248, 0.884);
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 40px;
+}
+.container .input-field {
+  display: flex;
+  position: relative;
+  flex: 3;
+  text-indent: 40px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  height: 22px;
+  min-width: 20px;
+  border-radius: 10px;
+  border: 1px solid rgb(143, 195, 245);
+}
+.input-field::placeholder {
+  position: relative;
+  left: 0;
+}
+.icon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: rgb(19, 104, 184);
+}
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.result-item {
+  display: flex;
+}
+.check-box {
+  width: 20px;
+}
+.container button {
+  padding: 8px 25px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  height: 30px;
+  background-color: rgb(97, 97, 228);
+  color: #fff;
+  cursor: pointer;
+}
