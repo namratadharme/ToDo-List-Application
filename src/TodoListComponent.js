@@ -6,6 +6,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 function TodoListComponent() {
   const [task, setTask] = useState("");
   const [result, setResult] = useState([]);
+  const [checkedItem, setCheckedItem] = useState([]);
 
   function handleInputTask(e) {
     setTask(e.target.value);
@@ -19,6 +20,18 @@ function TodoListComponent() {
     } else {
       alert("Enter your task");
     }
+  }
+  function handleCheckedItem(item) {
+    if (checkedItem.includes(item)) {
+      setCheckedItem(checkedItem.filter((i) => i !== item));
+    } else {
+      setCheckedItem([...checkedItem, item]);
+    }
+  }
+  function handleDelete(index) {
+    const newResult = result.filter((item) => !checkedItem.includes(item));
+    setResult(newResult);
+    setCheckedItem([]);
   }
 
   return (
@@ -34,6 +47,7 @@ function TodoListComponent() {
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
           <button onClick={handleAdd}>ADD</button>
+          <button onClick={() => handleDelete()}>Delete</button>
         </div>
 
         <div className="result">
@@ -41,7 +55,12 @@ function TodoListComponent() {
             result.map((item, index) => {
               return (
                 <div className="result-item" key={index}>
-                  <input type="checkbox" className="check-box" />
+                  <input
+                    type="checkbox"
+                    checked={checkedItem.includes(item)}
+                    className="check-box"
+                    onChange={() => handleCheckedItem(item)}
+                  />
                   {item}
                 </div>
               );

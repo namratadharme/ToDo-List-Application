@@ -1,3 +1,11 @@
+# Todo List Application
+
+[Click here to view deployed site](https://whimsical-sprinkles-6d7cdb.netlify.app/)
+
+## Project Description
+
+This is a simple Todo List Application built using **React**.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
