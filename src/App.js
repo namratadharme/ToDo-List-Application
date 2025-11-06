@@ -1,4 +1,3 @@
-import react from "react";
 import TodoListComponent from "./TodoListComponent";
 import "../src/Styles/app.css";
 
