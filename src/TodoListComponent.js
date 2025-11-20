@@ -13,14 +13,12 @@ function TodoListComponent() {
   }
 
   function handleAdd() {
-    if (task !== "") {
+    if (task.trim()) {
       setResult([...result, task]);
       setTask("");
-      alert("task added successful");
-    } else {
-      alert("Enter your task");
     }
   }
+
   function handleCheckedItem(item) {
     if (checkedItem.includes(item)) {
       setCheckedItem(checkedItem.filter((i) => i !== item));
@@ -28,7 +26,7 @@ function TodoListComponent() {
       setCheckedItem([...checkedItem, item]);
     }
   }
-  function handleDelete(index) {
+  function handleDelete() {
     const newResult = result.filter((item) => !checkedItem.includes(item));
     setResult(newResult);
     setCheckedItem([]);
@@ -46,26 +44,33 @@ function TodoListComponent() {
             className="input-field"
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
-          <button onClick={handleAdd}>ADD</button>
-          <button onClick={() => handleDelete()}>Delete</button>
+          <button onClick={handleAdd} className="add-btn">
+            ADD
+          </button>
         </div>
 
-        <div className="result">
+        <ul className="result">
           {result &&
             result.map((item, index) => {
               return (
-                <div className="result-item" key={index}>
-                  <input
-                    type="checkbox"
-                    checked={checkedItem.includes(item)}
-                    className="check-box"
-                    onChange={() => handleCheckedItem(item)}
-                  />
-                  {item}
-                </div>
+                <li key={index} className="list-item">
+                  <div>
+                    <input
+                      type="checkbox"
+                      value={task}
+                      checked={checkedItem.includes(item)}
+                      className="check-box"
+                      onChange={() => handleCheckedItem(item)}
+                    />
+                    {item}
+                  </div>
+                  <button className="delete-btn" onClick={() => handleDelete()}>
+                    Delete
+                  </button>
+                </li>
               );
             })}
-        </div>
+        </ul>
       </div>
     </>
   );

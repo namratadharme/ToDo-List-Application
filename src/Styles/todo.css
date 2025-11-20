@@ -48,13 +48,27 @@
 .check-box {
   width: 20px;
 }
-.container button {
+.container .add-btn {
   padding: 8px 25px;
   border-radius: 10px;
   outline: none;
   border: none;
   height: 30px;
   background-color: rgb(97, 97, 228);
+  color: #fff;
+  cursor: pointer;
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+.delete-btn {
+  background-color: red;
+  padding: 8px 25px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  height: 30px;
   color: #fff;
   cursor: pointer;
 }
