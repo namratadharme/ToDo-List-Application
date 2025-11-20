@@ -72,3 +72,11 @@
   color: #fff;
   cursor: pointer;
 }
+.para {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  margin: 0;
+  padding: 0;
+}

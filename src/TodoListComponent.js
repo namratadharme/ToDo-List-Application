@@ -4,32 +4,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function TodoListComponent() {
-  const [task, setTask] = useState("");
+  const [newtask, setNewTask] = useState("");
   const [result, setResult] = useState([]);
-  const [checkedItem, setCheckedItem] = useState([]);
+
+  const [error, setError] = useState();
 
   function handleInputTask(e) {
-    setTask(e.target.value);
+    setNewTask(e.target.value);
   }
 
   function handleAdd() {
-    if (task.trim()) {
+    if (!newtask.trim()) {
+      setError("Please Enter Your task");
+    } else {
+      const task = {
+        id: Date.now(),
+        text: newtask,
+        completed: false,
+      };
+      console.log(task);
       setResult([...result, task]);
-      setTask("");
+      setNewTask("");
+      setError("");
     }
   }
 
-  function handleCheckedItem(item) {
-    if (checkedItem.includes(item)) {
-      setCheckedItem(checkedItem.filter((i) => i !== item));
-    } else {
-      setCheckedItem([...checkedItem, item]);
-    }
+  function handleCheckedItem(id) {
+    const updatedResult = result.map((item) =>
+      item.id === id ? { ...item, completed: !item.completed } : item
+    );
+    setResult(updatedResult);
+    console.log(result);
   }
-  function handleDelete() {
-    const newResult = result.filter((item) => !checkedItem.includes(item));
+  function handleDelete(id) {
+    const newResult = result.filter((item) => item.id !== id);
     setResult(newResult);
-    setCheckedItem([]);
   }
 
   return (
@@ -38,7 +47,7 @@ function TodoListComponent() {
         <div className="flex-row">
           <input
             type="text"
-            value={task}
+            value={newtask}
             placeholder="Enter your task..."
             onChange={handleInputTask}
             className="input-field"
@@ -48,23 +57,26 @@ function TodoListComponent() {
             ADD
           </button>
         </div>
+        <p className="para">{error ? error : ""}</p>
 
         <ul className="result">
           {result &&
-            result.map((item, index) => {
+            result.map((item) => {
               return (
-                <li key={index} className="list-item">
+                <li key={item.id} className="list-item">
                   <div>
                     <input
                       type="checkbox"
-                      value={task}
-                      checked={checkedItem.includes(item)}
+                      checked={item.completed}
                       className="check-box"
-                      onChange={() => handleCheckedItem(item)}
+                      onChange={() => handleCheckedItem(item.id)}
                     />
-                    {item}
+                    <span>{item.text}</span>
                   </div>
-                  <button className="delete-btn" onClick={() => handleDelete()}>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(item.id)}
+                  >
                     Delete
                   </button>
                 </li>
